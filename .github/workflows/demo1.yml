@@ -8,7 +8,44 @@ on:
     types:
       - opened
 
+    # target (base) branch or the branch we want to merge into
+    branches:
+      - main # main
+      - 'dev-*' # dev-new, dev-this-is-new
+      - 'feat/**' # feat/new, feat/new/button
+
+    # branches-ignore: # cannot use branches and branches-ignore together
+    #   - dev
+
+    # paths: # cannot use paths and paths-ignore together
+    #   - 'xxx'
+
+    # paths-ignore:
+    #   - '.github/workflow/*'
+
+
+    # NOTE:
+    # - consider types, branches (or branches-ignore) then paths (or paths-ignore) in order
+    # - Only if precedence indicates trigger of workflow then consider next in order
+    # - branches/paths means workflow will ONLY be triggered when 1 file is changed in branches/paths
+    # - branches-ignore/paths-ignore means workflow will ONLY be triggered when 1 file is changed OUTSIDE of branches-ignore/paths-ignore
+
   workflow_dispatch:
+
+  push:
+    branches:
+      - main # main
+      - 'dev-*' # dev-new, dev-this-is-new
+      - 'feat/**' # feat/new, feat/new/button
+
+    # branches-ignore: # cannot use branches and branches-ignore together
+    #   - dev
+
+    # paths: # cannot use paths and paths-ignore together
+    #   - 'xxx'
+
+    paths-ignore:
+      - '.github/workflows/*'
 
 jobs:
   deploy:
